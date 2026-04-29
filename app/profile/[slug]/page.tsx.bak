@@ -1,0 +1,64 @@
+import { connectDB } from "@/lib/db";
+import { Profile } from "@/lib/models/profile";
+
+export default async function ProfilePage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  await connectDB();
+  const profile = await Profile.findOne({ slug: params.slug }).populate("user");
+
+  if (!profile || !profile.isPublic) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-gray-600">Profile not found</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-2xl mx-auto px-4 py-12">
+        <div className="bg-white rounded-lg shadow p-8">
+          {profile.avatar && (
+            <img
+              src={profile.avatar}
+              alt={profile.displayName}
+              className="w-24 h-24 rounded-full mb-4"
+            />
+          )}
+          <h1 className="text-3xl font-bold mb-2">{profile.displayName}</h1>
+          <p className="text-gray-600 mb-4">{profile.bio}</p>
+
+          {profile.github && (
+            <div className="mt-8">
+              <h2 className="text-2xl font-bold mb-4">GitHub</h2>
+              <p className="text-gray-600 mb-4">
+                Username: {profile.github.username}
+              </p>
+              <p className="text-gray-600 mb-4">
+                Contributions: {profile.github.contributionsCount}
+              </p>
+              {profile.github.languages.length > 0 && (
+                <div className="mb-4">
+                  <p className="font-semibold mb-2">Languages:</p>
+                  <div className="flex flex-wrap gap-2">
+                    {profile.github.languages.map((lang) => (
+                      <span
+                        key={lang}
+                        className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+                      >
+                        {lang}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
