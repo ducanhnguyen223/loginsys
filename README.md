@@ -37,7 +37,9 @@ npm install
 cp .env.example .env.local
 ```
 
-Fill in your MongoDB URI and OAuth credentials.
+Replace the placeholders with your MongoDB URI, NextAuth secret, and OAuth
+credentials. Keep real credentials in `.env.local` or your deployment secret
+store; never commit them.
 
 4. Run dev server
 ```bash
@@ -51,10 +53,10 @@ Open http://localhost:3000
 - `MONGODB_URI` - MongoDB connection string
 - `NEXTAUTH_URL` - App URL (http://localhost:3000 for dev)
 - `NEXTAUTH_SECRET` - Random secret for NextAuth
-- `GITHUB_ID` - GitHub OAuth app ID
-- `GITHUB_SECRET` - GitHub OAuth app secret
-- `GOOGLE_ID` - Google OAuth app ID
-- `GOOGLE_SECRET` - Google OAuth app secret
+- `GITHUB_CLIENT_ID` - GitHub OAuth app ID
+- `GITHUB_CLIENT_SECRET` - GitHub OAuth app secret
+- `GOOGLE_CLIENT_ID` - Google OAuth app ID
+- `GOOGLE_CLIENT_SECRET` - Google OAuth app secret
 
 ## Deployment
 
@@ -64,7 +66,3 @@ Deploy to Vercel:
 2. Connect repo to Vercel
 3. Add environment variables in Vercel dashboard
 4. Deploy
-
-## License
-
-MIT
