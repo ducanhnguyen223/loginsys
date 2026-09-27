@@ -1,70 +1,30 @@
 # LoginSys
 
-Auth system with MongoDB, GitHub & Google OAuth integration.
+An experimental Next.js app for account sign-in and profile pages. It includes GitHub and Google OAuth providers, MongoDB-backed user/profile data, and a dashboard.
 
-## Features
+This repository is a prototype; a production deployment has not been verified.
 
-- GitHub OAuth login
-- Google OAuth login
-- MongoDB user storage
-- User profile page
-- Dashboard
-- Responsive UI with Tailwind CSS
+## Stack
 
-## Tech Stack
+Next.js 15, React 19, NextAuth.js 4, MongoDB, TypeScript, and Tailwind CSS.
 
-- Next.js 14
-- NextAuth.js
-- MongoDB
-- Tailwind CSS
-- TypeScript
+## Run locally
 
-## Setup
-
-1. Clone repo
-```bash
-git clone https://github.com/ducanhnguyen223/loginsys.git
-cd loginsys
-```
-
-2. Install dependencies
 ```bash
 npm install
-```
-
-3. Setup environment variables
-```bash
 cp .env.example .env.local
-```
-
-Fill in your MongoDB URI and OAuth credentials.
-
-4. Run dev server
-```bash
 npm run dev
 ```
 
-Open http://localhost:3000
+Set the OAuth credentials in `.env.local`, then open <http://localhost:3000>.
 
-## Environment Variables
+| Variable | Purpose |
+| --- | --- |
+| `MONGODB_URI` | MongoDB connection URI |
+| `NEXTAUTH_URL` | Local app URL |
+| `NEXTAUTH_SECRET` | Secret used by NextAuth.js |
+| `GITHUB_CLIENT_ID` / `GITHUB_CLIENT_SECRET` | GitHub OAuth app credentials |
+| `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` | Google OAuth app credentials |
+| `GITHUB_TOKEN` | Optional token used by profile sync |
 
-- `MONGODB_URI` - MongoDB connection string
-- `NEXTAUTH_URL` - App URL (http://localhost:3000 for dev)
-- `NEXTAUTH_SECRET` - Random secret for NextAuth
-- `GITHUB_ID` - GitHub OAuth app ID
-- `GITHUB_SECRET` - GitHub OAuth app secret
-- `GOOGLE_ID` - Google OAuth app ID
-- `GOOGLE_SECRET` - Google OAuth app secret
-
-## Deployment
-
-Deploy to Vercel:
-
-1. Push to GitHub
-2. Connect repo to Vercel
-3. Add environment variables in Vercel dashboard
-4. Deploy
-
-## License
-
-MIT
+Never commit real credentials. The checked-in `.env.example` contains only local-development values and empty OAuth fields.
